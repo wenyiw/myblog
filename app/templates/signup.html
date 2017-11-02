@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<script type="text/javascript">
+
+</script>
+    <h1>{{ _('Sign Up') }}</h1>
+    <form method="POST" action="/signup">
+    	<p>
+         {{ form.hidden_tag() }}
+         {{ form.email.label }} {{ form.email(size=20) }}
+         {{ form.password.label }} {{ form.password(size=20) }}
+        <p>
+        <p><input type="submit" value="Signup"><p>
+    </form>
+ 
+{% endblock %}

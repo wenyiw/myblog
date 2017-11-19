@@ -27,7 +27,7 @@ def before_request():
     g.user = current_user
     if g.user.is_authenticated:
         g.user.last_seen = datetime.utcnow()
-        db.session.add(g.user)
+        db.session.add(g.user._get_current_object())
         db.session.commit()
         g.search_form = SearchForm()
     g.locale = get_locale()
@@ -156,7 +156,7 @@ def edit():
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
-        db.session.add(g.user)
+        db.session.add(g.user._get_current_object())
         db.session.commit()
         flash(gettext('Your changes have been saved.'))
         return redirect(url_for('user', nickname=g.user.nickname))

@@ -14,6 +14,9 @@
                 <img id="loading{{ post.id }}" style="display: none" src="/static/img/loading.gif">
             </div>
 			{% endif %}
+            {% if post.author.nickname == g.user.nickname %}
+            <div><a href="{{ url_for('delete', nickname = post.id) }}">{{ _('Delete') }}</a></div>
+            {% endif %}
         </td>
     </tr>
 </table>

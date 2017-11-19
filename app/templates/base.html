@@ -6,13 +6,13 @@
     {% else %}
     <title>Microblog</title>
     {% endif %}
-    <link href="{{ url_for('.static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ url_for('.static', filename='css/bootstrap-responsive.min.css') }}" rel="stylesheet">
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="{{ url_for('.static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('.static', filename='js/moment.min.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
     {% if g.locale != 'en' %}
-    <script src="{{ url_for('.static', filename='js/moment-' + g.locale + '.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-' + g.locale + '.min.js') }}"></script>
     {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
@@ -45,8 +45,7 @@
             <span class="icon-bar"></span>
           </a>
             <ul class="nav">
-              <a href="/">{{ _('Microblog') }}</a>
-              | <a href="{{ url_for('index') }}">{{ _('Home') }}</a>
+              <a href="{{ url_for('index') }}">{{ _('Home') }}</a>
               {% if g.user.is_authenticated %}
               | <a href="{{ url_for('user', nickname=g.user.nickname) }}">{{ _('Your Profile') }}</a>
               | <a href="{{ url_for('logout') }}">{{ _('Log Out') }}</a>

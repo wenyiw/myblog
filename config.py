@@ -34,7 +34,6 @@ ADMINS = ['justformytutorial@gmail.com']
 # available languages
 LANGUAGES = {
     'en': 'English',
-    'es': 'Español'
 }
 
 # microsoft translation service

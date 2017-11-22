@@ -31,12 +31,6 @@ def before_request():
         g.search_form = SearchForm()
     g.locale = get_locale()
 
-@app.route('/')
-def home():
-    return "Welcome to Flask"
-if __name__ == '__main__':
-    app.run(port=5000, host='localhost')
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm()

@@ -42,7 +42,8 @@ MS_TRANSLATOR_CLIENT_ID = '' # enter your MS translator app id here
 MS_TRANSLATOR_CLIENT_SECRET = '' # enter your MS translator app secret here
 
 
-
+# Whoosh does not work on Heroku
+WHOOSH_ENABLED = os.environ.get('HEROKU') is None
 
 
 

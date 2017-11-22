@@ -30,16 +30,16 @@ MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 # administrator list
 ADMINS = ['justformytutorial@gmail.com']
 
+# -*- coding: utf-8 -*-
 # available languages
 LANGUAGES = {
     'en': 'English',
+    'es': 'Español'
 }
 
 # microsoft translation service
 MS_TRANSLATOR_CLIENT_ID = '' # enter your MS translator app id here
 MS_TRANSLATOR_CLIENT_SECRET = '' # enter your MS translator app secret here
-
-WHOOSH_ENABLED = os.environ.get('HEROKU') is None
 
 
 

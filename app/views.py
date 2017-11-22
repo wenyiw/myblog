@@ -10,7 +10,6 @@ from flask_babel import gettext #for translation
 from app import babel
 from config import LANGUAGES
 from guess_language import guessLanguage
-from flask import send_file
 
 #for user login
 #loads a user from database
@@ -27,7 +26,7 @@ def before_request():
     g.user = current_user
     if g.user.is_authenticated:
         g.user.last_seen = datetime.utcnow()
-        db.session.add(g.user._get_current_object())
+        db.session.add(g.user)
         db.session.commit()
         g.search_form = SearchForm()
     g.locale = get_locale()
@@ -156,7 +155,7 @@ def edit():
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
-        db.session.add(g.user._get_current_object())
+        db.session.add(g.user)
         db.session.commit()
         flash(gettext('Your changes have been saved.'))
         return redirect(url_for('user', nickname=g.user.nickname))
@@ -246,20 +245,7 @@ def translate():
             request.form['sourceLang'], 
             request.form['destLang']) })
 
-@app.route('/delete/<int:nickname>')
-@login_required
-def delete(nickname):
-    post = Post.query.get(nickname)
-    if post is None:
-        flash('Post not found.')
-        return redirect(url_for('index'))
-    if post.author.nickname != g.user.nickname:
-        flash('You cannot delete this post.')
-        return redirect(url_for('index'))
-    db.session.delete(post)
-    db.session.commit()
-    flash('Your post has been deleted.')
-    return redirect(url_for('index'))
+
 
 
 

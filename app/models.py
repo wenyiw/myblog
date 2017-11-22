@@ -107,15 +107,12 @@ class Post(db.Model):
         return '<Post %r>' % (self.body)
 
 from app import app
-from config import WHOOSH_ENABLED
+import flask_whooshalchemy as whooshalchemy
+#if enable_search:
+whooshalchemy.whoosh_index(app, Post)
 
-enable_search = WHOOSH_ENABLED
-if enable_search:
-    import flask_whooshalchemy as whooshalchemy
 
-# ...
-if enable_search:
-    whooshalchemy.whoosh_index(app, Post)
+
 
 
 

@@ -11,6 +11,8 @@ from app import babel
 from config import LANGUAGES
 from guess_language import guessLanguage
 
+from twitter_streaming import get_tweets
+
 #for user login
 #loads a user from database
 @lm.user_loader #decorator
@@ -31,9 +33,6 @@ def before_request():
         g.search_form = SearchForm()
     g.locale = get_locale()
 
-@app.route('/')
-def home():
-    return "Welcome to Flask"
 if __name__ == '__main__':
     app.run(port=5000, host='localhost')
 
@@ -74,7 +73,7 @@ def signup():
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/index/<int:page>', methods=['GET', 'POST'])
-@login_required #make sure this page is only seen by logged in users
+@login_required # make sure this page is only seen by logged in users
 def index(page=1):
     form = PostForm()
     if form.validate_on_submit():
@@ -89,8 +88,8 @@ def index(page=1):
         db.session.commit()
         flash(gettext('Your post is now live!'))
         
-        #avoids submitting duplicate posts 
-        #when users adverdently refresh the page after submitting a blog post
+        # avoids submitting duplicate posts
+        # when users adverdently refresh the page after submitting a blog post
         return redirect(url_for('index'))
     
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
@@ -100,17 +99,18 @@ def index(page=1):
                            form=form,
                            posts=posts)
 
-#methods tells Flask that this view function accepts GET and POST requests 
-#without this only GET will be accepted
-#POST is needed for bringing in the form data entered by the user
+# methods tells Flask that this view function accepts GET and POST requests
+# without this only GET will be accepted
+# POST is needed for bringing in the form data entered by the user
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
 
+    tweets = get_tweets()
     form = SignupForm()
     if request.method == 'GET':
-        return render_template('login.html', form=form)
+        return render_template('login.html', form=form, tweets=tweets)
     elif request.method == 'POST':
         if form.validate_on_submit():
             user=User.query.filter_by(email=form.email.data).first()

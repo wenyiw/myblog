@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
-from flask.ext.babel import Babel, lazy_gettext
+from flask_babel import Babel, lazy_gettext
 
 app = Flask(__name__)
 app.config.from_object('config')

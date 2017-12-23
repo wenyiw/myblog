@@ -106,10 +106,10 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post %r>' % (self.body)
 
-from app import app
-import flask_whooshalchemy as whooshalchemy
+#from app import app
+#import flask_whooshalchemy as whooshalchemy
 #if enable_search:
-whooshalchemy.whoosh_index(app, Post)
+#whooshalchemy.whoosh_index(app, Post)
 
 
 

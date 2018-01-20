@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import Email, DataRequired, Length
 from app.models import User
-from flask_babel import gettext
+from flask.ext.babel import gettext
 
 class SignupForm(Form):
     email = StringField('email', validators=[DataRequired(),Email()])

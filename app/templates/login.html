@@ -26,4 +26,15 @@
             </div>
         </form>
     </div>
+    <div class="well">
+        <h3>Real Time Tweets</h3>
+        <ul style="list-style: none;">
+            {% for tweet in tweets %}
+                <div class="well" style="height: 80px; overflow-y: scroll; overflow-wrap: break-word; text-overflow: initial;">
+                    <li>{{ tweet.user.screen_name }} | {{ tweet.created_at }}</li>
+                    <li>&emsp;{{ tweet.text }}</li>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

@@ -1,8 +1,9 @@
+twitter
 Babel
 Flask
-Flask-Babel
 Flask-Login
 Flask-SQLAlchemy
+Flask-Babel
 Flask-WTF
 Flask-WhooshAlchemy
 Jinja2
@@ -29,3 +30,4 @@ sqlparse
 sqlalchemy-migrate
 guess-language
 Flask-Mail
+guess-language
